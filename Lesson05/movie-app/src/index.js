@@ -10,8 +10,10 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import logger from "redux-logger"
+import promise from "redux-promise-middleware"
 
-const allExtensions = composeWithDevTools(applyMiddleware(thunk));
+const allExtensions = composeWithDevTools(applyMiddleware(thunk,promise,logger));
 
 const myStore = createStore(rootReducer, allExtensions);
 const root = ReactDOM.createRoot(document.getElementById("root"));

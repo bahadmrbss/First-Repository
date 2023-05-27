@@ -1,11 +1,13 @@
+import React from "react"
+import MovieCard from './MovieCard'
 
-import React from 'react'
-
-export default function MoviesList({movies}) {
-    //console.log("MoveList Func Comp:::",props)
-    const emptyMessage = <p>There are no movies yet.</p>
-    const moviesList = <div>Movies List</div>
-  return (
-    <div>{movies.length === 0 ? emptyMessage : moviesList}</div>
-  )
+export default function MoviesList({ movieReducer }) {
+  //console.log("MoveList Func Comp:::",props)
+  const emptyMessage = <p>There are no movies yet.</p>;
+  const moviesList = movieReducer.error.response ? (
+    <h3>Error retrieving data!</h3>
+  ) : (
+    movieReducer.movies.map((movie) => <MovieCard key={movie.id} movie={movie}/>)
+  );
+  return <div>{movieReducer.length === 0 ? emptyMessage : moviesList}</div>;
 }
