@@ -4,11 +4,13 @@ import { Navigate } from "react-router-dom";
 
 export default class MovieForm extends Component {
   state = {
-    title: "",
-    cover: "",
+    title: this.props.movie ? this.props.movie.title : "",
+    cover: this.props.movie ? this.props.movie.cover :  "",
     errors: "",
-    done:false
+    done:false,
+    id:this.props.id ? this.props.id : null
   };
+
   render() {
     // console.log("FORM",this.props)
     const handleChange = (e) => {

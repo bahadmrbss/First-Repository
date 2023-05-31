@@ -17,14 +17,14 @@ export const FETCHED_MOVIES_ERROR = "FETCHED_MOVIES_ERROR";
 export function fetchMovies() {
   return (dispatch) => {
     dispatch({
-      type: "FETCHED_MOVIES",
+      type: "FETCH_MOVIES",
       payload: axios.get(`${API_BASE}/movies`).then((res) => res.data),
     });
   };
 }
 
 export function newMovies({title,cover}) {
-  console.log("MovieAction",title,cover)
+ // console.log("MovieAction",title,cover)
   return (dispatch) => 
   {
     dispatch({type: "NEW_MOVIES", payload: axios.post(`${API_BASE}/movies`,{title,cover})
@@ -33,3 +33,30 @@ export function newMovies({title,cover}) {
   }
   }
 
+  export function getMovie(id) {
+    return (dispatch) => {
+      dispatch({
+        type: "GET_MOVIE",
+        payload: axios.get(`${API_BASE}/movies/${id}`).then(res => res.data)
+      });
+    };
+  }
+
+  export function updateMovies({id,title,cover}) {
+ console.log("UPDATE MovieAction",id,title,cover)
+    return (dispatch) => 
+    {
+      dispatch({type: "UPDATE_MOVIES", payload: axios.put(`${API_BASE}/movies/${id}`,{title,cover})
+      // .then(res => console.log("API POST RESULT:",res))});
+      .then(res => res.data)});
+    }
+    }
+
+    export function deleteMovie(id) {
+      return (dispatch) => {
+        dispatch({
+          type: "DELETE_MOVIE",
+          payload: axios.delete(`${API_BASE}/movies/${id}`).then(res => Object.assign({},res,{id}))
+        });
+      };
+    }

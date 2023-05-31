@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MovieList from "../MovieList";
-import { fetchMovies } from "../../actions/movieActions";
+import { fetchMovies, deleteMovie} from "../../actions/movieActions";
 
 export class MoviesPage extends Component {
   static propTypes = {
@@ -16,8 +16,10 @@ export class MoviesPage extends Component {
     //console.log(this.props);
     return (
       <div>
-        Movies Page
-        <MovieList movieReducer={this.props.movieReducer} />
+        <h2>Movies Page</h2>
+        <MovieList 
+        deleteMovie={this.props.deleteMovie}
+        movieReducer={this.props.movieReducer} />
       </div>
     );
   }
@@ -27,6 +29,6 @@ const mapStateToProps = ({ movieReducer }) => ({
   movieReducer,
 });
 
-const mapDispatchToProps = {fetchMovies};
+const mapDispatchToProps = {fetchMovies, deleteMovie};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);

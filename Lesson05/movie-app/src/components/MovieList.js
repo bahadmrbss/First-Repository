@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import { Grid } from "semantic-ui-react";
 import { HashLoader } from "react-spinners";
 
-export default function MoviesList({ movieReducer }) {
+export default function MoviesList({ movieReducer, deleteMovie}) {
   //console.log("MoveList Func Comp:::",props)
   const emptyMessage = <p>There are no movies yet.</p>;
   const moviesList = movieReducer.error.response ? (
@@ -15,7 +15,7 @@ export default function MoviesList({ movieReducer }) {
         {movieReducer.movies.map((movie) => {
           return (
             <Grid.Column key={movie.id} style={{ marginBottom: "15px" }}>
-              <MovieCard movie={movie} />
+              <MovieCard deleteMovie={deleteMovie} movie={movie} />
             </Grid.Column>
           );
         })}
